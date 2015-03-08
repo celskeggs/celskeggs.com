@@ -1,0 +1,46 @@
+body {
+	background-color: black;
+	color: white;
+}
+#title {
+	position: absolute;
+	border: 1px solid #0090A0;
+	padding: 20px;
+	left: 0;
+	right: 0;
+	width: 1200px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: left;
+	top: 30px;
+	font-size: 30pt;
+	color: #444444;
+	font-family: Monospace;
+}
+.name {
+	color: white;
+}
+.comment {
+	color: #66BB66;
+}
+.include {
+	color: #662288;
+	font-weight: bold;
+}
+.literal {
+	color: #CCCC00;
+}
+.keyword {
+	color: #0090A0;
+}
+.ident {
+/*	font-weight: bold; */
+	color: #666666;
+}
+.todo {
+	color: #0090A0;
+	font-weight: bold;
+}
+.hidden {
+	display: none;
+}

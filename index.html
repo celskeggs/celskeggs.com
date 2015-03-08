@@ -3,61 +3,14 @@
 <head>
 <meta charset="utf-8">
 <title>Colby Skeggs</title>
-<style type="text/css">
-body {
-	background-color: black;
-	color: white;
-}
-#title {
-	position: absolute;
-	border: 1px solid #0090A0;
-	padding: 20px;
-	left: 0;
-	right: 0;
-	width: 1200px;
-	margin-left: auto;
-	margin-right: auto;
-	text-align: left;
-	top: 30px;
-	font-size: 30pt;
-	color: #444444;
-	font-family: Monospace;
-}
-.name {
-	color: white;
-}
-.comment {
-	color: #66BB66;
-}
-.include {
-	color: #662288;
-	font-weight: bold;
-}
-.literal {
-	color: #CCCC00;
-}
-.keyword {
-	color: #0090A0;
-}
-.ident {
-/*	font-weight: bold; */
-/*	color: #666666;    */
-}
-.todo {
-	color: #0090A0;
-	font-weight: bold;
-}
-.hidden {
-	display: none;
-}
-</style>
+<link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
 	<div id="title" itemscope itemtype="http://data-vocabulary.org/Person">
         <span class="include">#include</span> <span class="literal">&lt;person.h&gt;</span>;<br>
         <span class="include">#include</span> <span class="literal">&lt;document.h&gt;</span>;<br>
         <span class="keyword">struct</span> <span class="ident">sentient_being</span> <span class="hidden" itemprop="name">Colby Skeggs</span><span class="name">Colby_Skeggs</span>;<br>
-        <span class="keyword">struct</span> <span class="ident">hypertext_page</span> <span class="name">This_Page</span>;<br>
+        <span class="keyword">struct</span> <span class="ident">hypertext_page</span> <span class="name">Main_Page</span>;<br>
         <br>
         <span class="keyword">void</span> <span class="ident">initialize</span>() {<br>
         &nbsp;&nbsp;&nbsp;&nbsp;<span class="ident">Colby_Skeggs</span>.<span class="ident">github</span> = "<a class="hidden" href="https://github.com/col6y" itemprop="url">GitHub</a><a class="name" href="https://github.com/col6y">col6y</a>";<br>
@@ -66,7 +19,8 @@ body {
         &nbsp;&nbsp;&nbsp;&nbsp;<span class="ident">Colby_Skeggs</span>.<span class="ident">stackexchange</span> = "<a class="hidden" href="https://stackexchange.com/users/3844716/col6y?tab=accounts" itemprop="url">StackExchange</a><a class="name" href="https://stackexchange.com/users/3844716/col6y?tab=accounts">col6y</a>";<br>
         &nbsp;&nbsp;&nbsp;&nbsp;<span class="ident">Colby_Skeggs</span>.<span class="ident">chief_delphi</span> = "<a class="hidden" href="http://www.chiefdelphi.com/forums/member.php?find=lastposter&amp;t=130813" itemprop="url">Chief Delphi</a><a class="name" href="http://www.chiefdelphi.com/forums/member.php?find=lastposter&amp;t=130813">Colby Skeggs</a>";<br>
         &nbsp;&nbsp;&nbsp;&nbsp;<span class="ident">Colby_Skeggs</span>.<span class="ident">robotics_team</span> =<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<a class="name" href="http://team1540.org/" itemprop="affiliation">Team 1540 The Flaming Chickens</a>";<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;<span class="ident">This_Page</span>.<span class="ident">source</span> = "<a class="name" href="https://github.com/col6y/colbyskeggs.com">col6y/colbyskeggs.com</a>";<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;<a class="ident" href="/awards">enumerate_awards</a>();<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="ident">Main_Page</span>.<span class="ident">source</span> = "<a class="name" href="https://github.com/col6y/colbyskeggs.com">col6y/colbyskeggs.com</a>";<br>
 	    }<br>
 		<br>
 		<span class="comment">/* <span class="todo">TODO</span>: This page is incomplete. */</span><br>
