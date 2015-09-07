@@ -11,6 +11,8 @@ libraries:
   version: "2.6"
 
 handlers:
+- url: /images
+  static_dir: images
 - url: /.*
   script: main.application
   secure: never

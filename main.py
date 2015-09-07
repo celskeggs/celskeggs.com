@@ -4,7 +4,7 @@ import webapp2, os, cgi, datetime, sys, time, logging, json
 #  static_dir: static
 #  secure: always
 
-files = {"/": "index.html", "/awards": "awards.html", "/ccre": "ccre.html", "/style.css": "style.css"}
+files = {"/": "index.html", "/awards": "awards.html", "/ccre": "ccre.html", "/style.css": "style.css", "/blog": "blog.html"}
 
 class MainPage(webapp2.RequestHandler):
 	def get(self):
