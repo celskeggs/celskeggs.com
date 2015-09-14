@@ -81,7 +81,7 @@ Recent updates on my progress:
     I still have to take screenshots if I want to show the interface...
 
     ![Stick figure 4](/images/stickfigure4.png)
-  
+
     ... but I can also just press the yellow button to save the current image.
     (The first stick figure shown in this post is an example of that in action.)
 
@@ -93,3 +93,5 @@ Let's see where this goes.
 
 Cheers,
 	Colby Skeggs.
+
+The current version of my code is [v0.1.1](https://github.com/col6y/scribbles/releases/tag/v0.1.1): d1fb88b65e6c5376a3ff19d7343f7f8a59d29e01.
