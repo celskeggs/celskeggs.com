@@ -1,0 +1,23 @@
+### What's next? *(an addendum to 'Typed Racket!')*
+
+Some of my next steps include:
+
+*   **Perspective!**
+
+    Currently, sizing is based on fixed bone lengths.
+    This would be accurate if the characters lived in Flatland, but they're *supposed* to look slightly 3d-ish.
+
+*   **More settings!**
+
+    It needs to be possible to edit options and settings (such as sizing or character-specific changes) in a way that isn't just dragging handles.
+
+*   **Saving and loading!**
+
+    Currently, everything gets lost when you close the program. You *can* save *images*, but that's not the same.
+
+*   **Multiple characters!**
+
+    Nothing you actually want to draw has only a single stick figure! I need to be able to put multiple on a canvas.
+
+Cheers,
+	Colby Skeggs.
