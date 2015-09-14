@@ -1,0 +1,95 @@
+### Typed Racket!
+
+Hello again!
+
+Recent updates on my progress:
+
+*   **I've switched to Typed Racket!**
+
+    This is a dialect of Racket that has type annotations for everything. (In
+    the same vein as Haskell, but not as pure or well-developed.)
+
+    Here's a snippet of this:
+
+        (: vdist (-> v v Nonnegative-Real))
+        (define-provide (vdist v1 v2)
+          (sqrt (vdist-sq v1 v2)))
+
+        (: vin-origin-circle? (-> v Nonnegative-Real Boolean))
+        (define-provide (vin-origin-circle? v radius)
+          (< (vlen-sq v) (sq radius)))
+
+        (: vin-circle? (-> v v Nonnegative-Real Boolean))
+        (define-provide (vin-circle? needle center radius)
+          (vin-origin-circle? (v- needle center) radius))
+
+    Of course, it's not always helpful. I can't write this:
+
+        (: sq (-> Real Nonnegative-Real))
+        (define-provide (sq x)
+          (* x x))
+
+    because it only knows that `(: * (-> Real Real Real))` and can't realize
+    that a real number times itself is never negative.
+
+    It DOES know this, though:
+
+        (: * (-> Nonnegative-Real Nonnegative-Real Nonnegative-Real))
+        (: * (-> Negative-Real Negative-Real Nonnegative-Real))
+
+    so I was able to use the following:
+
+        (: sq (-> Real Nonnegative-Real))
+        (define-provide (sq x)
+          (if (positive? x)
+              (* x x)
+              (* x x)))
+
+    Annoying? Yes, but I've only had to do this once in my codebase so far.
+
+    (Why this works is left as an exercise to the reader, but it's really not
+    that complicated.)
+
+*   **I finished the basic skeleton and stick figure!**
+
+    ![Stick figure 3](/images/stickfigure3.png)
+
+    As you can see, this looks better than before, namely because it has more
+    joints. While I could have done this with the previous system, I rewrote a
+    bunch of the bone handling code so that the main part of my code looks like
+    this:
+
+        (r:define-style simple-style "black" 6 'solid "white" 'solid)
+
+        (compose simple-style 500 500
+                 (root collar 250 250)
+                 (line-bone pelvis collar 0 100)
+                 (line-bone head collar 0 -70 (r:circle head 50))
+                 (line-bone-chain (left-hand -50 0) (left-elbow -50 0) collar)
+                 (line-bone-chain (right-hand 50 0) (right-elbow 50 0) collar)
+                 (line-bone-chain (left-foot 0 60) (left-knee -42 42) pelvis)
+                 (line-bone-chain (right-foot 0 60) (right-knee 42 42) pelvis))
+
+    This is a big improvement over previous versions where I would have to
+    specify the name of something (like, say, 'head') multiple times in different
+    places for the same bone. Now, I can make things easier by defining macros
+    like `(line-bone-chain (variant dx dy extra-renders ...) ... invariant)` to
+    simplify the skeleton definition.
+
+*   **I have built-in image saving now!**
+
+    I still have to take screenshots if I want to show the interface...
+
+    ![Stick figure 4](/images/stickfigure4.png)
+  
+    ... but I can also just press the yellow button to save the current image.
+    (The first stick figure shown in this post is an example of that in action.)
+
+    Yes, having the buttons to control it be unmarked solid colors doesn't make
+    for a good user experience, but the point of this project isn't to build a
+    commercial-quality experience.
+
+Let's see where this goes.
+
+Cheers,
+	Colby Skeggs.
