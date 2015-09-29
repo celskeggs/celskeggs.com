@@ -1,0 +1,48 @@
+### Improved Engine!
+
+Hello again!
+
+Recently, I restructured everything in my codebase. This was because it wasn't designed well and was getting unwieldy. Now that's fixed!
+
+As part of the restructuring, I added better support for multiple figures (namely, deleting them), added support for settings on each of these figures, and added the ability to save and load projects!
+
+![Stick figure 7](/images/stickfigure7.png)
+
+The current best example of a setting is the scale factor, as demonstrated in the above image.
+
+The save files look something like this:
+
+    ((stick-figure-basic
+      ((#s(par-vec 248.35514557749573 228.90217394558664)
+        #s(par-vec 251 262)
+        #s(par-vec 251.57608258650384 309.4298349139509)
+        #s(par-vec 232.52938044236288 276.876709681069)
+        #s(par-vec 218.08089278361678 258.06922494352796)
+        #s(par-vec 239.18650979546277 282.56506083057087)
+        #s(par-vec 220.16354247181653 268.4014810577428)
+        #s(par-vec 246.0915057349493 337.3563638203401)
+        #s(par-vec 248.83407109419204 365.6839111065116)
+        #s(par-vec 251.45769568048397 337.8895886820439)
+        #s(par-vec 254.1542010763213 366.22155752732925))
+       1423/30)))
+
+They're saved with Racket's reading/writing capabilities, with a bit of processing on top to handle vectors.
+
+One of the downsides to the current setup is that the descriptions for patterns are noticably longer... but that's because I realized that the brevity wasn't going to be helpful once I moved beyond stick figures.
+
+The current interface looks something like this:
+
+![Stick figure 8](/images/stickfigure8.png)
+
+So, anyway, this means that I've completed three of the four next steps from two posts ago!
+
+I haven't done Perspective yet, because I'm not 100% sure that it will be immediately helpful, and I don't want to have to rewrite a bunch of stuff again right now.
+
+The good news: now I can do something more relevant to my actual project!
+
+(I'll post again soon with more details.)
+
+Cheers,
+	Colby Skeggs.
+
+The current version of my code is [v0.1.2](https://github.com/col6y/scribbles/releases/tag/v0.1.2): 6e13fbda269fe8911b6294736ec19e66fa9585b3.
