@@ -1,0 +1,9 @@
+### Colors and Polygons! (minipost)
+
+![Box figure 6](/images/boxfigure6.png)
+
+    (: attach-poly! (->* (PatternDef (Listof JointRef)) (Style) Void))
+    (define (attach-poly! pat joints [style r:all])
+      (attach-renderer! pat (lambda ([vecs : (Listof Vector2D)] [scale : Scale])
+                              (style (r:poly (for/list ((joint joints))
+                                               (joint-v-ref scale vecs joint)))))))
