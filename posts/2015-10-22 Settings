@@ -1,0 +1,34 @@
+### Settings!
+
+Hello again!
+
+I've been very busy with everything else this past month, so my work on this project has been mostly limited to class time.
+
+Unfortunately, that means that something that should have been faster took quite a while.
+
+So what did I do? Settings!
+
+Specifically, all entities have saveable-and-loadable settings, arbitrarily definable. This required lots of work on Setting Groups, Setting Prototype Groups, Settings, and Setting Prototypes, in addition to reworking of the scale setting to use the same system.
+
+Currently, there are a few too many places where I snuck around typing issues with a `cast`, but it all seems to work. Also, both compilation and running the program are starting to get pretty slow... the part of building the program being slow is a known Typed Racket issue, and the part with the probably is probably an inefficiency in my code.
+
+Now, what did I do with settings?
+
+![Box figure 7](/images/boxfigure7.png)
+
+I added a geometry module, which lets me do things like automatically choose the elbow's position based on hand position. However, there are two options for the elbow position for a specific hand position, so I needed options, which mean I needed the entire setting infrastructure, and that's why this feature took a month.
+
+Behind the scenes, none of the elbow positions for these figures are specified:
+
+![Box figure 8](/images/boxfigure8.png)
+
+Each one has options for whether the elbow is going *up* or *down*. This system, despite requiring a lot more code, is very useful from a usability standpoint.
+
+(One other reason this took so long is that it also required extending the saving-and-loading system to handle settings, setting prototypes, setting groups, and setting prototype groups.)
+
+Where do I go next with this? Well, unfortunately, the long compile times and the lag in the viewer are a big enough problem that I'm going to have to tackle them before going further. There's no sense in working with tools that slow you down.
+
+Cheers,
+	Colby Skeggs.
+
+The current version of my code is [v0.1.4](https://github.com/col6y/scribbles/releases/tag/v0.1.4): 6416dae2250235017dfe29666e1a2beb3804af57.
