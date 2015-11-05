@@ -1,0 +1,41 @@
+### Optimizations 2: Electric Boogaloo! (minipost)
+
+Hello again!
+
+I solved the optimization problem with a single solution!
+
+    (require racket/async-channel)
+    
+    (provide dropping-worker)
+    
+    (define (process-channel func channel)
+      (let loop ((value (async-channel-get channel)))
+        (let ((v2 (async-channel-try-get channel)))
+          (when v2
+            (loop v2)))
+        (func value)
+        (process-channel func channel)))
+    
+    (define (dropping-worker func)
+      (define channel (make-async-channel))
+      (thread
+       (lambda () (process-channel func channel)))
+      (lambda (work)
+        (async-channel-put channel work)))
+
+How does this snippet of code help?
+
+It provides a useful abstraction for running operations in another thread: you call the function returned by `(dropping-worker f)` on a parameter, which runs `f` on that parameter in another thread! Easy!
+
+... but how does that help? Well, we actually do a second thing, in `process-channel`: we grab an item to run off of the message channel... and then, as long as there's something else available on the channel, we discard our current value and take the next one. This means that, essentially, we collapse everything remaining down into just one item to process. In our case, that works, because rendering twice should, in theory, give us the same result both times.
+
+This now means that we don't have a huge number of rendering events to process - at any point in time, we just need to finish the current render and do one more in order to be up-to-date. This gets rid of the lag issue with trying to move around anything a significant amount.
+
+What's the trade-off? Well, now we do have jitter, but it's minimal at low usage counts, and even with around 21 characters on the screen, it's still mostly usable:
+
+![Box figure 11](/images/boxfigure11.png)
+
+At this point, the lag problem is solved. I still have the typed racket typechecking lag to think about - it takes about 35 seconds to typecheck my program! Since it does that every single time, iteration is very hard. I could be much more productive if this didn't take so long, so I plan to spend a bit of time trying to fix it.
+
+Cheers,
+	Colby Skeggs.
