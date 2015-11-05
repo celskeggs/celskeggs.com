@@ -1,0 +1,20 @@
+### Optimizations! (minipost)
+
+Hello!
+
+Latest work: after a bunch of optimizations, involving a bunch of type specifying and other things according to the optimization helper, the lag in the viewer is much improved!
+
+Specifically, the system now doesn't slow down at all, until the seventh figure, whereas the earlier version slowed significantly down at the third figure.
+
+The old version became annoyingly slow here:
+
+![Box figure 9](/images/boxfigure9.png)
+
+The new version got up to eight figures before being annoyingly slow:
+
+![Box figure 10](/images/boxfigure10.png)
+
+I do plan to make this even better shortly, before I move on. Also, I may take a divergence to see if I can optimize Typed Racket's typechecking at all.
+
+Cheers,
+	Colby Skeggs.
