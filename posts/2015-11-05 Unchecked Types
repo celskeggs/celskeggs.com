@@ -1,0 +1,30 @@
+### Contract generation
+
+Hello again.
+
+After a bunch of time chatting with people familiar with Typed Racket, including its developers on IRC, I determined one of the main causes of my slowdown.
+
+    (define-type Renderer (Pairof (-> (Instance DC<%>) Void) (-> Float Float Boolean)))
+
+The worst part is this:
+
+    (Instance DC<%>)
+
+Essentially, this is a type specifier for instances conforming to an interface. Said interface, `DC<%>`, is BIG. The generated contracts have to cover the entire interface to check that objects are properly behaved!
+
+This is, of course, very annoying, as I don't actually NEED most of the contracts! They're primarily used for interactions between typed and untyped code, which isn't a thing I'm doing.
+
+The worst part is that there is no easy fix.
+
+Possibilities:
+
+* Wait until one of Typed Racket's developers gets around to improving contract generation for interfaces. (This would be a while.)
+* Switch over to untyped Racket. (This would mean losing all of the benefits of Typed Racket.)
+* Switch all of my modules to `typed/racket/no-check`, which means that all the type declarations are ignored. (This also means losing all the benefits, but makes it possible to go back to Typed Racket more easily.)
+* Use `typed/racket/unsafe`, which skips contract generation. This might have some issues w/r/t being unsafe in the presence of typed-untyped interactions (not a thing), but also unsafe in the presence of casts (a thing.) (This might work.)
+* Offload everything that needs to interact with DC<%> into a separate untyped file, and wrap it thoroughly enough that it doesn't affect any types. (This would add some runtime overhead, but it might be justified.)
+
+I may choose the last one, but I'm going to do a bit more work on other things first.
+
+Cheers,
+	Colby Skeggs.

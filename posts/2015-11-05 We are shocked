@@ -1,0 +1,94 @@
+### We are shocked!
+
+![Box figure 12](/images/boxfigure12.png)
+
+Good evening!
+
+My figures have now developed faces!
+
+Unfortunately, they've yet to develop emotions, so they all just look shocked thanks to fix mouth shapes.
+
+#### How much work did this take to implement?
+
+The hardest part was probably figuring out the math behind translating along a sphere:
+
+    (: x*c (-> Vector2D Float Vector2D))
+    (define (x*c v s)
+      (vec (* (vec-x v) s) (vec-y v)))
+    
+    (: translate-along-sphere (-> Vector2D Vector2D Vector2D Float Vector2D))
+    (define (translate-along-sphere center top align tx)
+      (let* ((rel-top (v- top center))
+             (rel-align (v- align center))
+             (radius (vlen rel-top))
+             ; such that (= (vrotate-rad rel-top rotation-to) (vec 0 radius))
+             (rotation-to (atan (vec-x rel-top) (vec-y rel-top)))
+             (rot-align (vrotate-origin-rad rel-align rotation-to))
+             (x-for-the-y (sqrt (- (sq radius) (sq (vec-y rot-align)))))
+             (scale-factor (/ x-for-the-y (vec-x rot-align)))
+             (inv-scale-factor (/ 1 scale-factor))
+             (scalerot-align (x*c rot-align scale-factor))
+             ; (/ tx radius) is the translation of length tx around a circle of length radius, in radians!
+             (translation (- (/ tx radius)))
+             (scalerot-tx (vrotate-origin-rad scalerot-align translation))
+             (rel-tx (vrotate-origin-rad (x*c scalerot-tx inv-scale-factor) (- rotation-to)))
+             (final-tx (v+ rel-tx center)))
+        final-tx))
+
+(This is approximate; I had to do a couple of other things to get it to typecheck.)
+
+Essentially, this algorithm recenters and rotates the head, and then scales the target point out to the border, and moves it a fixed amount around the border based on radius and expected distance, and then reverses all of those transformations.
+
+After I had that working, I needed a few more rendering styles:
+
+    (define eye-style (r:wrap-style "black" 1 'solid "black" 'solid))
+    (define nose-style (r:wrap-style "gray" 1 'solid "gray" 'solid))
+    (define mouth-style (r:wrap-style "black" 2 'solid "white" 'solid))
+
+A handle for the face (the only part manipulatable right now, which controls the face's position):
+
+    (define face (attach-joint-rel! jts 20.0 0.0 head))
+
+Which needs to be kept within the head area:
+
+    (attach-limited-bone! skel face head 0.6)
+
+Three corners of the head circle:
+
+    (define top-of-head (dynamic-joint scale () () (head)
+                                       (v- head (vec 0.0 (scale* scale 0.7)))))
+    (define right-of-head (dynamic-joint scale () () (head)
+                                       (v+ head (vec (scale* scale 0.7) 0.0))))
+    (define left-of-head (dynamic-joint scale () () (head)
+                                       (v- head (vec (scale* scale 0.7) 0.0))))
+
+And some virtual joints for the positions of the mouth, nose, and eyes via rotation around the sphere on axes defined by the head's corners:
+
+    (define nose (dynamic-joint scale () () (face head top-of-head)
+                                (translate-along-sphere head top-of-head face (scale* scale 0.2))))
+    (define mouth (dynamic-joint scale () () (face head top-of-head)
+                                (translate-along-sphere head top-of-head face (scale* scale 0.4))))
+    (define left-eye (dynamic-joint scale () () (face head top-of-head right-of-head)
+                                    (translate-along-sphere head right-of-head face (scale* scale 0.2))))
+    (define right-eye (dynamic-joint scale () () (face head top-of-head left-of-head)
+                                     (translate-along-sphere head left-of-head face (scale* scale 0.2))))
+
+And finally some circles for the actual rendering:
+
+    (attach-circle! pat left-eye 0.07 eye-style)
+    (attach-circle! pat right-eye 0.07 eye-style)
+    (attach-circle! pat nose 0.03 nose-style)
+    (attach-circle! pat mouth 0.1 mouth-style)
+
+This actually doesn't seem like all that much - that's the advantage of spending so long on infrastructure!
+
+Here's the editor view of that scene:
+
+![Box figure 13](/images/boxfigure13.png)
+
+(Which, by the way, I loaded from a savefile saved when I made the original image. And it came back exactly the same!)
+
+Cheers,
+	Colby Skeggs.
+
+The current version of my code is [v0.1.5](https://github.com/col6y/scribbles/releases/tag/v0.1.5): ad10fe891548dae3a89561743ae1590c747b4b1a.
