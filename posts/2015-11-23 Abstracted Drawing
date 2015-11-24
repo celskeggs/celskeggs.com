@@ -1,0 +1,38 @@
+### Wrapped Drawing
+
+Hi!
+
+Remember the issues with expensive contracts?
+
+The worst part was this:
+
+    (Instance DC<%>)
+
+To solve the problem (mostly), I extracted a separate untyped file that would wrap all of the drawing operations, so that none of the expensive interfaces would be typechecked.
+
+I correspondingly wrapped everything in opaque types:
+
+    (require/typed "wrap-draw.rkt"
+                   [#:opaque ColorInst wd:color?]
+                   [#:opaque PenInst wd:pen?]
+                   [#:opaque BrushInst wd:brush?]
+                   [#:opaque Context wd:context?]
+
+I tested the relative timing by thunking out the main code (wrapping it in a thunk call), which would run everything except actually running the program.
+
+Original:
+
+    real	0m34.283s
+    user	0m33.503s
+    sys	0m0.847s
+
+Modified:
+
+    real	0m19.052s
+    user	0m18.343s
+    sys	0m0.747s
+
+Hooray! That's nearly half the typechecking time chopped off.
+
+Cheers,
+	Colby Skeggs.
