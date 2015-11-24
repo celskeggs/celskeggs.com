@@ -1,0 +1,7 @@
+### More faces! (Minipost)
+
+![Box figure 18](/images/boxfigure18.png)
+
+I also fixed a bug causing the face to disappear in rare occasions, and a bug preventing me from saving any patterns with an 'n' in a setting name.
+
+The ability to switch between faces also required some more rendering infrastructure.
