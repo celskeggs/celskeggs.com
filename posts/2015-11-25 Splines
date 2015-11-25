@@ -2,7 +2,7 @@
 
 ![Box figure 20](/images/boxfigure20.png)
 
-These actually weren't that hard! However, I'm not completely satisfied with these - the lengths of the splines are preserved properly. Just look at those arms.
+These actually weren't that hard! However, I'm not completely satisfied with these - the lengths of the splines aren't preserved properly. Just look at those arms.
 
 (Behind the scenes, I also abstracted out the limb handling code so that I didn't duplicate it across right-arm vs left-arm, which will come in handy once I start using it for legs too.)
 
