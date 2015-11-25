@@ -1,6 +1,6 @@
 ### Bezier Curves!
 
-![Box figure 21](/images/boxfigure21.png)
+![Box figure 21](/images/boxfigure21.png)![Box figure 20](/images/boxfigure20.png)
 
 At the left: the new arm drawing system. At the right: the old arm drawing system.
 
@@ -43,11 +43,7 @@ So, then, with that, I can use the control points and the endpoints to find two 
                      ((cb0 cb1 cb2 cb3) (quadratic->cubic v1 cp2 v2)))
           (values ca0 ca1 ca2 ca3 cb0 cb1 cb2 cb3))))
 
-And finally, it all worked! Excellent.
-
-Here's a comparison of the two styles, so that you can see the difference:
-
-![Box figure 21](/images/boxfigure21.png)![Box figure 20](/images/boxfigure20.png)
+And finally, it all worked!
 
 Cheers, Colby Skeggs.
 
