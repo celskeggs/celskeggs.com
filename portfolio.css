@@ -1,0 +1,102 @@
+body {
+	background-color: black;
+	color: white;
+}
+#main {
+	position: absolute;
+	border: 1px solid #0090A0;
+	padding: 20px;
+	left: 0;
+	right: 0;
+	width: 1022px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: left;
+	top: 30px;
+	font-size: 15pt;
+	color: #DDDDDD;
+	font-family: Monospace;
+}
+.name {
+	color: #0090A0;
+}
+.entry img {
+	margin-top: 10px;
+	margin-left: 10px;
+	height: 50px;
+}
+.entry img.travis {
+	padding-left: 5px;
+	padding-right: 6px;
+}
+#ccre h2 {
+	color: orange;
+}
+#misterio h2 {
+	color: #009000;
+}
+#cosmicdrift h2 {
+	color: #888888;
+}
+#scribbles h2 {
+	color: #00B0B0;
+}
+
+#sack h2 {
+	color: #AAAA00;
+}
+#squareassault h2 {
+	color: #00FFFF;
+}
+
+#libca h2 {
+	color: #00E6FF;
+}
+#cg-graphics h2 {
+	color: #0000FF;
+}
+#libsyscall h2 {
+	color: #FFFF00;
+}
+#virtlua h2 {
+	color: #777777;
+}
+.desc {
+	margin: 10px;
+}
+.desc a {
+	color: #0090A0;
+}
+h1 {
+	font-size: 30pt;
+	font-weight: normal;
+	text-align: center;
+	margin: 0px;
+}
+h2 {
+	font-size: 20pt;
+	font-weight: normal;
+	text-align: center;
+	margin: 0px;
+}
+#main > h2 {
+	margin-top: 20px;
+}
+.row {
+	position: relative;
+	width: 100%;
+	height: 300px;
+	margin-top: 20px;
+}
+.entry1 {
+	left: 0;
+}
+.entry2 {
+	right: 0;
+}
+.entry {
+	position: absolute;
+	width: 500px;
+	height: 300px;
+	border: 1px solid #0090A0;
+}
