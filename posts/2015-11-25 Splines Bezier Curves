@@ -1,0 +1,50 @@
+### Bezier Curves!
+
+![Box figure 21](/images/boxfigure21.png)![Box figure 20](/images/boxfigure20.png)
+
+At the left: the new arm drawing system. At the right: the old arm drawing system.
+
+Why did I change this? The old version was naively using Racket's builtin spline drawing tool, which is given two endpoints and a control point. Unfortunately, the curve doesn't actually go *through* the control point. And it uses line segments on the ends. Bleh.
+
+Now, it turns out that it's not easy to figure out how to draw a curve through a given point. Luckily, I found [Rob Spencer's bezier curve fitting algorithm](http://scaledinnovation.com/analytics/splines/aboutSplines.html), which does exactly what I want!
+
+I implemented this:
+
+    (: calc-control-points (-> Vector2D Vector2D Vector2D Float (Values Vector2D Vector2D)))
+    (define (calc-control-points v0 v1 v2 t)
+      (let ((d01 (vdist v0 v1))
+            (d12 (vdist v1 v2))
+            (r20 (v- v2 v0)))
+        (let ((fa (/ (* t d01) (+ d01 d12)))
+              (fb (/ (* t d12) (+ d01 d12))))
+          (values (v- v1 (v*c r20 fa))
+                  (v+ v1 (v*c r20 fb))))))
+
+After I did this, it still didn't work... as it turned out, you actually need to cut up the curve into two separate quadratic bezier curves, not one single cubic bezier curve!
+
+Unfortunately, Racket doesn't have any methods for drawing quadratic bezier curves... but I searched around and found [a post on the cairo mailing list](http://lists.cairographics.org/archives/cairo/2009-October/018351.html) (cairo is the vector graphics library that Racket uses as a backend for drawing) that explains how to convert.
+
+Now I can implement that too:
+
+    (: quadratic->cubic (-> Vector2D Vector2D Vector2D (Values Vector2D Vector2D Vector2D Vector2D)))
+    (define (quadratic->cubic p0 p1 p2)
+      (values p0
+              (vinterpolate p0 p1 (/ 2.0 3.0))
+              (vinterpolate p1 p2 (/ 2.0 3.0))
+              p2))
+
+So, then, with that, I can use the control points and the endpoints to find two cubic curves:
+
+    (: fit-cubics (-> Vector2D Vector2D Vector2D Float (Values Vector2D Vector2D Vector2D Vector2D    ; cubic 1
+                                                               Vector2D Vector2D Vector2D Vector2D))) ; cubic 2
+    (define (fit-cubics v0 v1 v2 t)
+      (let-values (((cp1 cp2) (calc-control-points v0 v1 v2 t)))
+        (let-values (((ca0 ca1 ca2 ca3) (quadratic->cubic v0 cp1 v1))
+                     ((cb0 cb1 cb2 cb3) (quadratic->cubic v1 cp2 v2)))
+          (values ca0 ca1 ca2 ca3 cb0 cb1 cb2 cb3))))
+
+And finally, it all worked!
+
+Cheers, Colby Skeggs.
+
+The current version of my code is [v0.1.6](https://github.com/col6y/scribbles/releases/tag/v0.1.6): 95619bad551f93d084e43fd25e9cc5fbb50387e8.
