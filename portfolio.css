@@ -1,10 +1,6 @@
-body {
-	background-color: black;
-	color: white;
-}
 #main {
 	position: absolute;
-	border: 1px solid #0090A0;
+	/* border: 1px solid #0090A0; */
 	padding: 20px;
 	left: 0;
 	right: 0;
@@ -12,13 +8,22 @@ body {
 	margin-left: auto;
 	margin-right: auto;
 	text-align: left;
-	top: 30px;
+	top: 0;
 	font-size: 15pt;
-	color: #DDDDDD;
+	color: #333333;
 	font-family: Monospace;
 }
 .name {
 	color: #0090A0;
+}
+#highlight {
+	position: absolute;
+	left: -300px;
+	bottom: -5px;
+}
+#highlight img {
+	height: 200px;
+	width: 300px;
 }
 .entry img {
 	margin-top: 10px;
@@ -29,36 +34,36 @@ body {
 	padding-left: 5px;
 	padding-right: 6px;
 }
-#ccre h2 {
+#ccre h3 {
 	color: orange;
 }
-#misterio h2 {
+#misterio h3 {
 	color: #009000;
 }
-#cosmicdrift h2 {
-	color: #888888;
+#cosmicdrift h3 {
+	color: #000000;
 }
-#scribbles h2 {
+#scribbles h3 {
 	color: #00B0B0;
 }
 
-#sack h2 {
-	color: #AAAA00;
+#sack h3 {
+	color: #AA0000;
 }
-#squareassault h2 {
-	color: #00FFFF;
+#squareassault h3 {
+	color: #006060;
 }
 
-#libca h2 {
-	color: #00E6FF;
+#libca h3 {
+	color: #00C6DD;
 }
-#cg-graphics h2 {
-	color: #0000FF;
+#cg-graphics h3 {
+	color: #0000CC;
 }
-#libsyscall h2 {
-	color: #FFFF00;
+#libsyscall h3 {
+	color: #CC00CC;
 }
-#virtlua h2 {
+#virtlua h3 {
 	color: #777777;
 }
 .desc {
@@ -68,24 +73,28 @@ body {
 	color: #0090A0;
 }
 h1 {
-	font-size: 30pt;
+	font-size: 38pt;
 	font-weight: normal;
 	text-align: center;
 	margin: 0px;
 }
 h2 {
+	margin-top: 50px;
+	font-size: 28pt;
+	font-weight: normal;
+	text-align: center;
+	margin-bottom: 0;
+}
+h3 {
 	font-size: 20pt;
 	font-weight: normal;
 	text-align: center;
 	margin: 0px;
 }
-#main > h2 {
-	margin-top: 20px;
-}
 .row {
 	position: relative;
 	width: 100%;
-	height: 300px;
+	height: 265px;
 	margin-top: 20px;
 }
 .entry1 {
@@ -97,6 +106,72 @@ h2 {
 .entry {
 	position: absolute;
 	width: 500px;
-	height: 300px;
+	height: 265px;
 	border: 1px solid #0090A0;
+	border-radius: 10px;
 }
+#main-projects {
+	font-size: 34pt;
+	margin-top: 20px;
+}
+.row-1 .entry {
+	border: 2px solid #0090A0;
+}
+.row-2 {
+	height: 255px;
+}
+.row-2 .entry {
+	border: 2px dashed #0090A0;
+	font-size: 14pt;
+	width: 480px;
+	height: 255px;
+}
+.row-2 .entry1 {
+	left: 20px;
+}
+.row-2 .entry2 {
+	right: 20px;
+}
+#complete-projects {
+	font-size: 26pt;
+}
+.row-complete {
+	height: 250px;
+}
+.row-complete .entry {
+	border: 2px dotted #0090A0;
+	font-size: 14pt;
+	width: 460px;
+	height: 250px;
+}
+.row-complete .entry1 {
+	left: 40px;
+}
+.row-complete .entry2 {
+	right: 40px;
+}
+.row-complete h3 {
+	font-size: 18pt;
+}
+#side-projects {
+	font-size: 24pt;
+}
+.row-side {
+	height: 220px;
+}
+.row-side .entry {
+	border: 1px solid #0090A0;
+	font-size: 13pt;
+	width: 425px;
+	height: 220px;
+}
+.row-side .entry1 {
+	left: 76px;
+}
+.row-side .entry2 {
+	right: 76px;
+}
+.row-side h3 {
+	font-size: 16pt;
+}
+
