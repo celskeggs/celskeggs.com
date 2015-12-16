@@ -1,0 +1,22 @@
+### Line variance
+
+With a bit of work on posing, the feet started to look a bit better:
+
+![Box figure 31](/images/boxfigure31.png)
+
+But I've digressed slightly to take care of line widths: note how that third small character has overly thick lines, since they aren't varied with scale.
+
+To fix this, I changed the pen styles to be dynamically generated based on both scale and style, not just style:
+
+![Box figure 32](/images/boxfigure32.png)
+
+Another example:
+
+![Box figure 33](/images/boxfigure33.png)
+
+The line width variance helped, but it probably needs to have a smarter nonlinear system.
+
+(The feet still need some more work too.)
+
+Cheers,
+	Colby Skeggs.
