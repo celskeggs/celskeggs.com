@@ -1,0 +1,14 @@
+### Line variance
+
+With a bit of work, I went from this:
+
+![Box figure 32](/images/boxfigure32.png)
+
+to this:
+
+![Box figure 34](/images/boxfigure34.png)
+
+There, smoothing is better and some of the weird visual artifacts are gone!
+
+Cheers,
+	Colby Skeggs.
