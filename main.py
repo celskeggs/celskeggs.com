@@ -1,4 +1,4 @@
-import webapp2, os, cgi, datetime, sys, time, logging, json
+import webapp2, os, cgi, datetime, sys, time, logging, json, random, threading
 from google.appengine.ext import ndb
 from google.appengine.api import urlfetch, xmpp, memcache, users
 
@@ -163,7 +163,44 @@ class TogglTrelloWebhook(webapp2.RequestHandler):
 		self.response.headers["Content-Type"] = "text/plain"
 		self.response.write("OK")
 
+roll_rand = random.SystemRandom()
+def rolla(a, b):
+	return sum(roll_rand.randint(1, b) for i in range(a))
+
+next_id = 0
+id_lock = threading.Lock()
+def get_next_id():
+	global next_id
+	with id_lock:
+		next_id += 1
+		return next_id
+
+def roll(x):
+	terms = x.replace(" ","").split("+")
+	total = 0
+	for term in terms:
+		if "d" in term:
+			a, b = term.split("d", 1)
+			if a.isdigit() and b.isdigit():
+				total += rolla(int(a), int(b))
+			else:
+				return "Invalid syntax: bad term '%s'" % term
+		elif term.isdigit():
+			total += int(term)
+		else:
+			return "Invalid syntax: bad term '%s'" % term
+	did = get_next_id()
+	extra = "\n(roll numbers are best-effort numbering)" if did == 1 else ""
+	return "#%d => %d" % (did, total)
+
+class RollHook(webapp2.RequestHandler):
+	def get(self):
+		cmd = self.request.get("text", None)
+		jo = {"text": roll(cmd), "response_type": "in_channel"}
+		self.response.headers["Content-Type"] = "application/json"
+		self.response.write(json.dumps(jo))
+
 application = webapp2.WSGIApplication([
 	(key, MainPage)
     for key in files.keys()
-] + [("/trello-webhook", TogglTrelloWebhook), ("/comments", CommentsAPI)])
+] + [("/trello-webhook", TogglTrelloWebhook), ("/comments", CommentsAPI), ("/roll", RollHook)])
