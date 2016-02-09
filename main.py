@@ -2,7 +2,7 @@ import webapp2, os, cgi, datetime, sys, time, logging, json, random, threading
 from google.appengine.ext import ndb
 from google.appengine.api import urlfetch, xmpp, memcache, users
 
-files = {"/": "index.html", "/ccre": "ccre.html", "/style.css": "style.css", "/blog": "blog.html", "/blog.js": "blog.js", "/blog.css": "blog.css", "/gender_110240": "gender.html", "/portfolio": "portfolio.html", "/portfolio.css": "portfolio.css"}
+files = {"/": "index.html", "/ccre": "ccre.html", "/style.css": "style.css", "/blog": "blog.html", "/blog.js": "blog.js", "/blog.css": "blog.css", "/name": "name.html", "/gender_110240": "gender.html", "/portfolio": "portfolio.html", "/portfolio.css": "portfolio.css"}
 
 class MainPage(webapp2.RequestHandler):
 	def get(self):
