@@ -5,13 +5,13 @@ with open("blog.html", "w") as out:
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Colby Skeggs - CS Project Blog</title>
+<title>Cel "Colby" Skeggs - CS Project Blog</title>
 <link rel="stylesheet" type="text/css" href="blog.css" />
 <script src="blog.js"></script>
 </head>
 <body>
 	<div id="blog">
-		<h2>Colby's CompSci Project Blog</h2>
+		<h2>Cel's (Colby's) CompSci Project Blog</h2>
 """)
 	posts = os.listdir("posts")
 	for ri, name in enumerate(sorted(posts, reverse=True)):

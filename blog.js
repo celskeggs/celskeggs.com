@@ -1,11 +1,8 @@
 function fetch_data(x) {
 	fetch("/comments", {method: "GET", mode: "same-origin", credentials: "same-origin", cache: "no-cache"}).then(res => res.json()).then(x);
-	//x({"is_logged_in": true, "login_url": "http://example.org/", "comments":[{"date": "2015-11-16", "user": "Colby Skeggs", "content": "Hello, World!", "post_id": 1}]});
 }
 function post_data(json, cb) {
 	fetch("/comments", {method: "POST", body: JSON.stringify(json), mode: "same-origin", credentials: "same-origin", cache: "no-cache"}).then(cb);
-	//console.log(json);
-	//cb();
 }
 window.onload = function() {
 	fetch_data(function(json) {
