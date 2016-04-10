@@ -3,13 +3,18 @@ from google.appengine.ext import ndb
 from google.appengine.api import urlfetch, xmpp, memcache, users
 
 files = {"/": "index.html", "/ccre": "ccre.html", "/style.css": "style.css", "/blog": "blog.html", "/blog.js": "blog.js", "/blog.css": "blog.css", "/name": "name.html", "/gender_110240": "gender.html", "/portfolio": "portfolio.html", "/portfolio.css": "portfolio.css"}
+colby_files = dict(files)
+colby_files["/"] = "redirect.html"
 
 class MainPage(webapp2.RequestHandler):
 	def get(self):
+		use_files = files
+		if "colbyskeggs" in self.request.host_url:
+			use_files = colby_files
 		path = self.request.path
-		assert path in files, "Bad path (somehow?): %s" % path
+		assert path in use_files, "Bad path (somehow?): %s" % path
 		self.response.headers["Content-Type"] = "text/css" if path.endswith(".css") else "text/html"
-		with open(files[path], "r") as f:
+		with open(use_files[path], "r") as f:
 			while True:
 				x = f.read(4096)
 				if not x: break
