@@ -29,6 +29,6 @@ Each one has options for whether the elbow is going *up* or *down*. This system,
 Where do I go next with this? Well, unfortunately, the long compile times and the lag in the viewer are a big enough problem that I'm going to have to tackle them before going further. There's no sense in working with tools that slow you down.
 
 Cheers,
-	Colby Skeggs.
+	Cel Skeggs.
 
 The current version of my code is [v0.1.4](https://github.com/col6y/scribbles/releases/tag/v0.1.4): 6416dae2250235017dfe29666e1a2beb3804af57.
