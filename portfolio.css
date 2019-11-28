@@ -34,6 +34,12 @@
 	padding-left: 5px;
 	padding-right: 6px;
 }
+#hyades h3 {
+	color: red;
+}
+#searust h3 {
+	color: #007799;
+}
 #ccre h3 {
 	color: orange;
 }
@@ -53,7 +59,12 @@
 #squareassault h3 {
 	color: #006060;
 }
-
+#musicazoo h3 {
+	color: #406873;
+}
+#webafs h3 {
+	color: #00DD00;
+}
 #libca h3 {
 	color: #00C6DD;
 }
@@ -87,6 +98,13 @@ h2 {
 }
 h3 {
 	font-size: 20pt;
+	font-weight: normal;
+	text-align: center;
+	margin: 0px;
+}
+h4 {
+	padding-top: 10px;
+	font-size: 13pt;
 	font-weight: normal;
 	text-align: center;
 	margin: 0px;
